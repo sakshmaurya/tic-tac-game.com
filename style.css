@@ -1,0 +1,294 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    text-align: center;
+    min-height: 100vh;
+    background: linear-gradient(
+        45deg, 
+        #2193b0, 
+        #6dd5ed
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add 3D cube background elements */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: rotate 20s linear infinite;
+    z-index: -1;
+}
+
+body::before {
+    top: -150px;
+    right: -150px;
+    border-radius: 30px;
+    transform: rotate(45deg);
+}
+
+body::after {
+    bottom: -150px;
+    left: -150px;
+    border-radius: 30px;
+    transform: rotate(45deg);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Add floating bubbles */
+.bubble {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 15s linear infinite;
+    z-index: -1;
+}
+
+.bubble:nth-child(1) {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+    top: 20%;
+    right: 20%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(3) {
+    bottom: 30%;
+    left: 30%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+.container{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game{
+    height: 60vmin;
+    width: 60vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vmin;
+    position: relative;
+}
+
+.box{
+    height: 18vmin;
+    width: 18vmin;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    font-size: 8vmin;
+    color: #b0413e;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.box:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.02);
+}
+
+/* Button Styles */
+#new-btn, #reset-btn {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    background: linear-gradient(45deg, #42080f, #8B0000);
+    color: #fff;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+#new-btn:hover, #reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #8B0000, #42080f);
+}
+
+#new-btn:active, #reset-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Message Styles */
+.msg-container {
+    height: 100vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+}
+
+#msg {
+    color: #fff;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.hide {
+    display: none;
+}
+
+/* Heading Style */
+h1 {
+    color: #fff;
+    font-size: 3rem;
+    margin: 2rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 3px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+/* Animation for balloon effect */
+@keyframes pop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.pop-effect {
+    animation: pop 0.3s ease-out;
+    pointer-events: none;
+}
+
+.balloon-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Add this new style for the button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Add these styles for the winning line */
+.win-line {
+    position: absolute;
+    background-color: #ff4444;
+    z-index: 1;
+    transition: all 0.3s ease-in;
+}
+
+.horizontal {
+    height: 3px;
+    width: 0;
+    animation: growHorizontal 0.5s forwards;
+}
+
+.vertical {
+    width: 3px;
+    height: 0;
+    animation: growVertical 0.5s forwards;
+}
+
+.diagonal {
+    height: 3px;
+    width: 0;
+    animation: growDiagonal 0.5s forwards;
+}
+
+@keyframes growHorizontal {
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes growVertical {
+    to {
+        height: 100%;
+    }
+}
+
+@keyframes growDiagonal {
+    to {
+        width: 140%;
+    }
+}
